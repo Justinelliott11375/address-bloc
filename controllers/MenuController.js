@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const dateFormat = require('dateformat');
 
 module.exports = class MenuController {
     constructor(){
@@ -9,6 +10,7 @@ module.exports = class MenuController {
                 message: "Pleas choose from an option below: ",
                 choices: [
                     "Add new contact",
+                    "Get Date",
                     "Exit"
                 ]
             }
@@ -22,6 +24,9 @@ module.exports = class MenuController {
             switch(response.mainMenuChoice){
                 case "Add new contact":
                     this.addContact();
+                    break;
+                case "Get Date":
+                    this.getDate();
                     break;
                 case "Exit":
                     this.exit();
@@ -45,6 +50,13 @@ module.exports = class MenuController {
         this.main();
     }
 
+    getDate(){
+        this.clear();
+        var currentDateTime = new Date();
+        var formattedDateTime = dateFormat(currentDateTime, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+        console.log(formattedDateTime);
+        this.main();
+    }
     exit(){
         console.log("Thanks for using AddressBloc!");
         process.exit();
